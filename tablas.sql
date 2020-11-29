@@ -35,6 +35,13 @@ CREATE TABLE tienda(
 	-- dni int -- Redundante
 );
 
+CREATE TABLE producto(
+	direccion varchar(127),
+	nombre varchar(63),
+	stock int,
+	precio double precision
+);
+
 -- Restricciones
 
 ALTER TABLE empleado ADD PRIMARY KEY(dni);
@@ -54,3 +61,6 @@ ALTER TABLE trabaja ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
 ALTER TABLE trabaja ADD FOREIGN KEY(direccion) REFERENCES tienda(direccion);
 
 ALTER TABLE tienda ADD PRIMARY KEY(direccion);
+
+ALTER TABLE producto ADD PRIMARY KEY(direccion, nombre);
+ALTER TABLE producto ADD FOREIGN KEY(direccion) REFERENCES tienda(direccion);

@@ -48,6 +48,17 @@ CREATE TABLE es(
 	id int
 );
 
+CREATE TYPE pago_t as ENUM ('tarjeta', 'contraentrega');
+CREATE TABLE pedido(
+	id int,
+	tipo_de_pago pago_t
+	direccion varchar(127),
+	fecha_de_entrega date,
+	dni int,
+	placa varchar(7),
+	dni_r int
+);
+
 -- Restricciones
 
 ALTER TABLE empleado ADD PRIMARY KEY(dni);
@@ -73,4 +84,9 @@ ALTER TABLE producto ADD FOREIGN KEY(direccion) REFERENCES tienda(direccion);
 
 ALTER TABLE es ADD PRIMARY KEY(direccion, nombre, id);
 ALTER TABLE es ADD FOREIGN KEY(direccion, nombre) REFERENCES producto(direccion, nombre);
--- ALTER TABLE es ADD FOREIGN KEY(id) REFERENCES pedido(id);
+ALTER TABLE es ADD FOREIGN KEY(id) REFERENCES pedido(id);
+
+ALTER TABLE pedido ADD PRIMARY KEY(id);
+-- ALTER TABLE pedido ADD FOREIGN KEY(dni) REFERENCES cliente(dni);
+-- ALTER TABLE pedido ADD FOREIGN KEY(placa) REFERENCES vehiculo(placa);
+ALTER TABLE pedido ADD FOREIGN KEY(dni) REFERENCES repartidor(dni);

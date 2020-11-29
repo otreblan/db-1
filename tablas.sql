@@ -24,6 +24,12 @@ CREATE TABLE repartidor(
 	pedidos int
 );
 
+CREATE TABLE trabaja(
+	dni int,
+	sueldo double precision,
+	direccion varchar(127)
+);
+
 -- Restricciones
 
 ALTER TABLE empleado ADD PRIMARY KEY(dni);
@@ -37,3 +43,7 @@ ALTER TABLE vendedor ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
 
 ALTER TABLE repartidor ADD PRIMARY KEY(dni);
 ALTER TABLE repartidor ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
+
+ALTER TABLE trabaja ADD PRIMARY KEY(dni);
+ALTER TABLE trabaja ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
+-- ALTER TABLE trabaja ADD FOREIGN KEY(direccion) REFERENCES tienda(direccion);

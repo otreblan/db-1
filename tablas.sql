@@ -17,5 +17,5 @@ CREATE TABLE gerente(
 ALTER TABLE empleado ADD PRIMARY KEY(dni);
 
 ALTER TABLE gerente ADD PRIMARY KEY(dni);
-ALTER TBALE gerente ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
--- ALTER TBALE gerente ADD FOREIGN KEY(direccion) REFERENCES trabaja(direccion);
+ALTER TABLE gerente ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
+-- ALTER TABLE gerente ADD FOREIGN KEY(direccion) REFERENCES trabaja(direccion);

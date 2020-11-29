@@ -18,6 +18,12 @@ CREATE TABLE vendedor(
 	caja varchar(63)
 );
 
+CREATE TABLE repartidor(
+	dni int,
+	entregas int,
+	pedidos int
+);
+
 -- Restricciones
 
 ALTER TABLE empleado ADD PRIMARY KEY(dni);
@@ -28,3 +34,6 @@ ALTER TABLE gerente ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
 
 ALTER TABLE vendedor ADD PRIMARY KEY(dni);
 ALTER TABLE vendedor ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
+
+ALTER TABLE repartidor ADD PRIMARY KEY(dni);
+ALTER TABLE repartidor ADD FOREIGN KEY(dni) REFERENCES empleado(dni);

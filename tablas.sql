@@ -42,6 +42,12 @@ CREATE TABLE producto(
 	precio double precision
 );
 
+CREATE TABLE es(
+	direccion varchar(127),
+	nombre varchar(63),
+	id int
+);
+
 -- Restricciones
 
 ALTER TABLE empleado ADD PRIMARY KEY(dni);
@@ -64,3 +70,7 @@ ALTER TABLE tienda ADD PRIMARY KEY(direccion);
 
 ALTER TABLE producto ADD PRIMARY KEY(direccion, nombre);
 ALTER TABLE producto ADD FOREIGN KEY(direccion) REFERENCES tienda(direccion);
+
+ALTER TABLE es ADD PRIMARY KEY(direccion, nombre, id);
+ALTER TABLE es ADD FOREIGN KEY(direccion, nombre) REFERENCES producto(direccion, nombre);
+-- ALTER TABLE es ADD FOREIGN KEY(id) REFERENCES pedido(id);

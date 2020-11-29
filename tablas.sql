@@ -12,10 +12,19 @@ CREATE TABLE gerente(
 	direccion varchar(127),
 );
 
+CREATE TABLE vendedor(
+	dni int,
+	ventas int,
+	caja varchar(63)
+);
+
 -- Restricciones
 
 ALTER TABLE empleado ADD PRIMARY KEY(dni);
 
 ALTER TABLE gerente ADD PRIMARY KEY(dni);
 ALTER TABLE gerente ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
--- ALTER TABLE gerente ADD FOREIGN KEY(direccion) REFERENCES trabaja(direccion);
+-- ALTER TABLE gerente ADD FOREIGN KEY(direccion) REFERENCES tienda(direccion);
+
+ALTER TABLE vendedor ADD PRIMARY KEY(dni);
+ALTER TABLE vendedor ADD FOREIGN KEY(dni) REFERENCES empleado(dni);

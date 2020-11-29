@@ -59,6 +59,10 @@ CREATE TABLE pedido(
 	dni_r int
 );
 
+CREATE TABLE vehiculo(
+	placa varchar(7)
+);
+
 -- Restricciones
 
 ALTER TABLE empleado ADD PRIMARY KEY(dni);
@@ -88,5 +92,7 @@ ALTER TABLE es ADD FOREIGN KEY(id) REFERENCES pedido(id);
 
 ALTER TABLE pedido ADD PRIMARY KEY(id);
 -- ALTER TABLE pedido ADD FOREIGN KEY(dni) REFERENCES cliente(dni);
--- ALTER TABLE pedido ADD FOREIGN KEY(placa) REFERENCES vehiculo(placa);
+ALTER TABLE pedido ADD FOREIGN KEY(placa) REFERENCES vehiculo(placa);
 ALTER TABLE pedido ADD FOREIGN KEY(dni) REFERENCES repartidor(dni);
+
+ALTER TABLE vehiculo ADD PRIMARY KEY(placa);

@@ -3,7 +3,7 @@
 CREATE TABLE Empleado(
 	dni int,
 	nombre varchar(127),
-	direccion varchar(127),
+	residencia varchar(127),
 	celular int
 );
 

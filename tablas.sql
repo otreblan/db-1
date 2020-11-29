@@ -1,12 +1,21 @@
 -- Tablas
 
-CREATE TABLE Empleado(
+CREATE TABLE empleado(
 	dni int,
 	nombre varchar(127),
 	residencia varchar(127),
 	celular int
 );
 
+CREATE TABLE gerente(
+	dni int,
+	direccion varchar(127),
+);
+
 -- Restricciones
 
-ALTER TABLE Empleado ADD PRIMARY KEY(dni);
+ALTER TABLE empleado ADD PRIMARY KEY(dni);
+
+ALTER TABLE gerente ADD PRIMARY KEY(dni);
+ALTER TBALE gerente ADD FOREIGN KEY(dni) REFERENCES empleado(dni);
+-- ALTER TBALE gerente ADD FOREIGN KEY(direccion) REFERENCES trabaja(direccion);

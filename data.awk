@@ -1,12 +1,9 @@
 #!/usr/bin/env -S awk -f
+
 BEGIN {
+	n = ARGC > 1 ? ARGV[ARGC-1] : 100;
 	srand();
-	if(ARGC >1) {
-		n = ARGV[ARGC-1];
-	}
-	else {
-		n = 100;
-	}
+
 
 	print "i,n"
 

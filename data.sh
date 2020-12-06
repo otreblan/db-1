@@ -34,7 +34,15 @@ function _trabaja()
 		uniq -u |\
 		awk \
 		-vi=$tienda_n \
-		'BEGIN{srand()} {printf "%s,%s,%s\n", $0, int(rand()*1000), int(rand()*i)}'
+		'BEGIN {
+			srand()
+		}
+		{
+			printf "%s,%s,%s\n",
+				$0,
+				int(rand()*1000),
+				int(rand()*i)
+		}'
 }
 
 

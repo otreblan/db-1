@@ -1,6 +1,5 @@
 #!/usr/bin/env -S awk -f
 
-# \copy empleado FROM empleado.csv CSV HEADER
 BEGIN {
 	n = ARGC > 1 ? ARGV[ARGC-1] : 100;
 	srand();

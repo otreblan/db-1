@@ -31,7 +31,7 @@ CREATE TABLE trabaja(
 );
 
 CREATE TABLE tienda(
-	direccion varchar(127),
+	direccion varchar(127)
 	-- dni int -- Redundante
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE es(
 CREATE TYPE pago_t as ENUM ('tarjeta', 'contraentrega');
 CREATE TABLE pedido(
 	id int,
-	tipo_de_pago pago_t
+	tipo_de_pago pago_t,
 	direccion varchar(127),
 	fecha_de_entrega date,
 	dni int,

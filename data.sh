@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+n="${1:-100}"
+tienda_n=$((n/2))
+
+empleados="$(./empleado.awk "$n")"
+dnis="$(cut -d, -f1 <<< $empleados)"
+vendedores="$(./vendedor.awk <<< $dnis)"
+tiendas="$(./tienda.awk "$tienda_n")"
+gerentes="$(shuf -n$tienda_n <<< $dnis)"
+gerentes_t="$(./gerente_trabaja.awk <<< $gerentes)"
+
 function _empleados()
 {
 	echo "dni,nombre,residencia,celular"
@@ -45,22 +55,8 @@ function _trabaja()
 		}'
 }
 
-
-
-n="${1:-100}"
-tienda_n=$((n/2))
-
-empleados="$(./empleado.awk "$n")"
-
-dnis="$(cut -d, -f1 <<< $empleados)"
-
-vendedores="$(./vendedor.awk <<< $dnis)"
-tiendas="$(./tienda.awk "$tienda_n")"
-gerentes="$(shuf -n$tienda_n <<< $dnis)"
-gerentes_t="$(./gerente_trabaja.awk <<< $gerentes)"
-
-_empleados > empleado.csv
+_empleados  > empleado.csv
 _vendedores > vendedor.csv
-_tiendas > tienda.csv
-_gerentes > gerente.csv
-_trabaja > trabaja.csv
+_tiendas    > tienda.csv
+_gerentes   > gerente.csv
+_trabaja    > trabaja.csv

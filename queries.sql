@@ -20,3 +20,13 @@ WHERE
 -- 3)
 
 -- 4)
+SELECT m.direccion, v.dni
+FROM (
+	SELECT t.direccion, MAX(v.ventas) AS ventas
+	FROM trabaja as t, vendedor as v
+	WHERE t.dni = v.dni
+	GROUP BY t.direccion
+) AS m, trabaja AS t, vendedor as v
+WHERE m.direccion = t.direccion AND
+v.ventas = m.ventas
+;

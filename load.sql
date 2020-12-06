@@ -1,7 +1,5 @@
-DELETE FROM empleado;
-DELETE FROM vendedor;
-DELETE FROM tienda;
-DELETE FROM gerente;
+TRUNCATE empleado CASCADE;
+TRUNCATE tienda CASCADE;
 
 \copy empleado FROM empleado.csv CSV HEADER
 \copy vendedor FROM vendedor.csv CSV HEADER

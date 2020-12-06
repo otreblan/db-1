@@ -24,6 +24,21 @@ function _gerentes()
 	cat <<< $gerentes
 }
 
+function _trabaja()
+{
+	echo "dni,sueldo, direccion"
+	cat <<< $gerentes_t
+
+	printf "%s\n" "$dnis" "$gerentes" |\
+		sort |\
+		uniq -u |\
+		awk \
+		-vi=$tienda_n \
+		'BEGIN{srand()} {printf "%s,%s,%s\n", $0, int(rand()*1000), int(rand()*i)}'
+}
+
+
+
 n="${1:-100}"
 tienda_n=$((n/2))
 
@@ -34,13 +49,10 @@ dnis="$(cut -d, -f1 <<< $empleados)"
 vendedores="$(./vendedor.awk <<< $dnis)"
 tiendas="$(./tienda.awk "$tienda_n")"
 gerentes="$(shuf -n$tienda_n <<< $dnis)"
+gerentes_t="$(./gerente_trabaja.awk <<< $gerentes)"
 
 _empleados > empleado.csv
 _vendedores > vendedor.csv
 _tiendas > tienda.csv
 _gerentes > gerente.csv
-
-# \copy empleado FROM empleado.csv CSV HEADER
-# \copy vendedor FROM vendedor.csv CSV HEADER
-# \copy tienda FROM tienda.csv CSV HEADER
-# \copy gerente FROM gerente.csv CSV HEADER
+_trabaja > trabaja.csv

@@ -5,7 +5,7 @@ BEGIN {
 	n = ARGC > 1 ? ARGV[ARGC-1] : 100;
 	srand();
 
-	print "dni,nombre,residencia,celular"
+	#print "dni,nombre,residencia,celular"
 
 	for(i = 0; i < n; i++) {
 		printf "%d,%d,%s,%d\n",

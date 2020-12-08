@@ -14,12 +14,12 @@ function psql-explain()
 				printf "-cEXPLAIN (ANALYZE, FORMAT JSON) %s;\0", cmd;
 			}
 		}' |\
-		xargs -0 psql -tAUpostgres
+		xargs -0 psql -tAUpostgres |\
+		jq '.[]."Execution Time"'
 }
 
-psql-explain 10000 '
+psql-explain 100000 '
 	SELECT t.direccion, g.dni
 	FROM trabaja AS t, gerente AS g
 	WHERE t.dni = g.dni
-	; ' |\
-	jq '.[]."Execution Time"'
+	;'

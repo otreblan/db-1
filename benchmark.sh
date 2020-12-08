@@ -21,14 +21,14 @@ function psql-explain()
 
 function benchmark()
 {
-	postfix="$1"
+	suffix="$1"
 	n=${2:-100}
 
 	psql-explain $n '
 		SELECT t.direccion, g.dni, e.nombre
 		FROM trabaja AS t, gerente AS g, empleado as e
 		WHERE t.dni = g.dni AND e.dni = g.dni
-		;' > query-1-"$postfix".csv
+		;' > query-1-"$suffix".csv
 
 	psql-explain $n '
 		SELECT t.direccion
@@ -39,14 +39,14 @@ function benchmark()
 			SELECT MAX(ventas)
 			FROM vendedor
 		)
-		;' > query-2-"$postfix".csv
+		;' > query-2-"$suffix".csv
 
 	psql-explain $n '
 		SELECT p.direccion, p.nombre, g.dni, MAX(p.precio) as max
 		FROM producto AS p, trabaja AS t, gerente as g
 		WHERE t.direccion = p.direccion AND t.dni = g.dni
 		GROUP BY p.direccion, p.nombre, g.dni
-		;' > query-3-"$postfix".csv
+		;' > query-3-"$suffix".csv
 
 	psql-explain $n '
 		SELECT m.direccion, v.dni
@@ -58,7 +58,7 @@ function benchmark()
 		) AS m, trabaja AS t, vendedor as v
 		WHERE m.direccion = t.direccion AND
 		v.ventas = m.ventas
-		;' > query-4-"$postfix".csv
+		;' > query-4-"$suffix".csv
 }
 
 benchmark noindex 10

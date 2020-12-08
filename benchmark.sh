@@ -64,9 +64,34 @@ function benchmark()
 
 for index in noindex index
 do
+	psql \
+		-Upostgres \
+		-c"DROP TABLE IF EXISTS
+			cliente,
+			empleado,
+			es,
+			gerente,
+			pedido,
+			producto,
+			repartidor,
+			tienda,
+			trabaja,
+			vehiculo,
+			vendedor
+			CASCADE;"
+
+	psql -Upostgres -f tablas.sql
+
+	#if [[ "$index" == index ]]
+	#then
+	#	# TODO load index
+	#	#psql -Upostgres -f index.sql
+	#fi
+
 	for n in 1000 10000 100000 1000000
 	do
-		# TODO Reload data
+		./data.sh $n
+		psql -Upostgres -f load.sql
 		benchmark "$index-$n" 1000
 	done
 done

@@ -55,8 +55,24 @@ function _trabaja()
 		}'
 }
 
+function _producto()
+{
+	echo "direccion,nombre,stock,precio"
+	printf "%s\n" "$tiendas" |\
+		awk '{
+			for(i = 0; i < 100; i++){
+				printf "%s,%s,%s,%s\n",
+				$0,
+				i,
+				int(rand()*1000),
+				rand()*1000
+			}
+		}'
+}
+
 _empleados  > empleado.csv
 _vendedores > vendedor.csv
 _tiendas    > tienda.csv
 _gerentes   > gerente.csv
 _trabaja    > trabaja.csv
+_producto   > producto.csv

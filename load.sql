@@ -6,3 +6,4 @@ TRUNCATE tienda CASCADE;
 \copy tienda FROM tienda.csv CSV HEADER
 \copy gerente FROM gerente.csv CSV HEADER
 \copy trabaja FROM trabaja.csv CSV HEADER
+\copy producto FROM producto.csv CSV HEADER

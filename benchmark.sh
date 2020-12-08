@@ -19,10 +19,11 @@ function psql-explain()
 		jq '.[]."Execution Time"'
 }
 
+# benchmark suffix n
 function benchmark()
 {
-	suffix="$1"
-	n=${2:-100}
+	local suffix="$1"
+	local n=${2:-100}
 
 	psql-explain $n '
 		SELECT t.direccion, g.dni, e.nombre
@@ -61,4 +62,11 @@ function benchmark()
 		;' > query-4-"$suffix".csv
 }
 
-benchmark noindex 10
+for index in noindex index
+do
+	for n in 1000 10000 100000 1000000
+	do
+		# TODO Reload data
+		benchmark "$index-$n" 1000
+	done
+done

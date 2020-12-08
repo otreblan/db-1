@@ -1,9 +1,9 @@
 --
 
 -- 1)
-SELECT t.direccion, g.dni
-FROM trabaja AS t, gerente AS g
-WHERE t.dni = g.dni
+SELECT t.direccion, g.dni, e.nombre
+FROM trabaja AS t, gerente AS g, empleado as e
+WHERE t.dni = g.dni AND e.dni = g.dni
 ;
 
 -- 2)

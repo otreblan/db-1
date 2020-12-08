@@ -82,11 +82,10 @@ do
 
 	psql -Upostgres -f tablas.sql
 
-	#if [[ "$index" == index ]]
-	#then
-	#	# TODO load index
-	#	#psql -Upostgres -f index.sql
-	#fi
+	if [[ "$index" == index ]]
+	then
+		psql -Upostgres -f index.sql
+	fi
 
 	for n in 1000 10000 100000 1000000
 	do

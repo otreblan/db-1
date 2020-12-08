@@ -18,8 +18,36 @@ function psql-explain()
 		jq '.[]."Execution Time"'
 }
 
-psql-explain 100000 '
+n=100
+
+psql-explain $n '
 	SELECT t.direccion, g.dni
 	FROM trabaja AS t, gerente AS g
 	WHERE t.dni = g.dni
 	;'
+
+psql-explain $n '
+	SELECT t.direccion
+	FROM trabaja AS t, vendedor v
+	WHERE
+		t.dni = v.dni AND
+		v.ventas = (
+		SELECT MAX(ventas)
+		FROM vendedor
+	)
+	;'
+
+# psql-explain $n ''
+
+psql-explain $n '
+	SELECT m.direccion, v.dni
+	FROM (
+		SELECT t.direccion, MAX(v.ventas) AS ventas
+		FROM trabaja as t, vendedor as v
+		WHERE t.dni = v.dni
+		GROUP BY t.direccion
+	) AS m, trabaja AS t, vendedor as v
+	WHERE m.direccion = t.direccion AND
+	v.ventas = m.ventas
+	;'
+

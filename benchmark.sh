@@ -6,6 +6,7 @@ function psql-explain()
 	local n=$1
 	shift
 
+	echo "time"
 	awk \
 		-vcmd="$@" \
 		-vn=$n \
@@ -18,13 +19,14 @@ function psql-explain()
 		jq '.[]."Execution Time"'
 }
 
-n=${1:-100}
+postfix="$1"
+n=${2:-100}
 
 psql-explain $n '
 	SELECT t.direccion, g.dni, e.nombre
 	FROM trabaja AS t, gerente AS g, empleado as e
 	WHERE t.dni = g.dni AND e.dni = g.dni
-	;'
+	;' > query-1-"$postfix".csv
 
 psql-explain $n '
 	SELECT t.direccion
@@ -35,14 +37,14 @@ psql-explain $n '
 		SELECT MAX(ventas)
 		FROM vendedor
 	)
-	;'
+	;' > query-2-"$postfix".csv
 
 psql-explain $n '
 	SELECT p.direccion, p.nombre, g.dni, MAX(p.precio) as max
 	FROM producto AS p, trabaja AS t, gerente as g
 	WHERE t.direccion = p.direccion AND t.dni = g.dni
 	GROUP BY p.direccion, p.nombre, g.dni
-	;'
+	;' > query-3-"$postfix".csv
 
 psql-explain $n '
 	SELECT m.direccion, v.dni
@@ -54,5 +56,5 @@ psql-explain $n '
 	) AS m, trabaja AS t, vendedor as v
 	WHERE m.direccion = t.direccion AND
 	v.ventas = m.ventas
-	;'
+	;' > query-4-"$postfix".csv
 

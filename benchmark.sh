@@ -37,7 +37,12 @@ psql-explain $n '
 	)
 	;'
 
-# psql-explain $n ''
+psql-explain $n '
+	SELECT p.direccion, g.dni, MAX(p.precio) as max
+	FROM producto AS p, trabaja AS t, gerente as g
+	WHERE t.direccion = p.direccion AND t.dni = g.dni
+	GROUP BY p.direccion, g.dni
+	;'
 
 psql-explain $n '
 	SELECT m.direccion, v.dni

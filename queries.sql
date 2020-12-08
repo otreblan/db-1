@@ -18,6 +18,11 @@ WHERE
 ;
 
 -- 3)
+SELECT p.direccion, g.dni, MAX(p.precio) as max
+FROM producto AS p, trabaja AS t, gerente as g
+WHERE t.direccion = p.direccion AND t.dni = g.dni
+GROUP BY p.direccion, g.dni
+;
 
 -- 4)
 SELECT m.direccion, v.dni

@@ -43,10 +43,13 @@ function benchmark()
 		;' > query-2-"$suffix".csv
 
 	psql-explain $n '
-		SELECT p.direccion, p.nombre, g.dni, MAX(p.precio) as max
-		FROM producto AS p, trabaja AS t, gerente as g
-		WHERE t.direccion = p.direccion AND t.dni = g.dni
-		GROUP BY p.direccion, p.nombre, g.dni
+		SELECT g.dni, m.direccion, p.nombre, p.precio
+		FROM(
+			SELECT p.direccion, MAX(p.precio) as max
+			FROM producto as p
+			GROUP BY p.direccion
+		) AS m, trabaja AS t, producto AS p, gerente AS g
+		WHERE m.direccion = t.direccion AND t.dni = g.dni AND p.precio = m.max
 		;' > query-3-"$suffix".csv
 
 	psql-explain $n '
@@ -62,7 +65,7 @@ function benchmark()
 		;' > query-4-"$suffix".csv
 }
 
-for index in noindex index
+for index in index noindex
 do
 	psql \
 		-Upostgres \
@@ -91,6 +94,6 @@ do
 	do
 		./data.sh $n
 		psql -Upostgres -f load.sql
-		benchmark "$index-$n" 1000
+		benchmark "$index-$n" ${1:-100}
 	done
 done

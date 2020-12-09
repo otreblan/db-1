@@ -12,6 +12,7 @@ CREATE INDEX index_vendedor_ventas ON vendedor USING hash (ventas);
 -- 3)
 CREATE INDEX index_trabaja_direccion ON trabaja USING hash (direccion);
 CREATE INDEX index_producto_direccion ON producto USING hash (direccion);
+CREATE INDEX index_producto_precio ON producto USING hash (precio);
 --CREATE INDEX index_trabaja_dni ON trabaja USING hash (dni);
 --CREATE INDEX index_gerente_dni ON gerente USING hash (dni);
 

@@ -36,5 +36,6 @@ FROM (
 	GROUP BY t.direccion
 ) AS m, trabaja AS t, vendedor as v
 WHERE m.direccion = t.direccion AND
-v.ventas = m.ventas
+v.ventas = m.ventas AND
+t.dni = v.dni
 ;

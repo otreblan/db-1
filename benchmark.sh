@@ -15,7 +15,7 @@ function psql-explain()
 				printf "-cEXPLAIN (ANALYZE, FORMAT JSON) %s;\0", cmd;
 			}
 		}' |\
-		xargs -0 psql -tAUpostgres |\
+		parallel -m0 psql -tAUpostgres |\
 		jq '.[]."Execution Time"'
 }
 
@@ -61,7 +61,8 @@ function benchmark()
 			GROUP BY t.direccion
 		) AS m, trabaja AS t, vendedor as v
 		WHERE m.direccion = t.direccion AND
-		v.ventas = m.ventas
+		m.ventas = v.ventas AND
+		t.dni = v.dni
 		;' > query-4-"$suffix".csv
 }
 

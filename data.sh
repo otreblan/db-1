@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 n="${1:-100}"
-tienda_n=$((n/2))
+tienda_n=$((n/100))
 
 empleados="$(./empleado.awk "$n")"
 dnis="$(cut -d, -f1 <<< $empleados)"

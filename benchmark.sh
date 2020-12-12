@@ -15,7 +15,7 @@ function psql-explain()
 				printf "-cEXPLAIN (ANALYZE, FORMAT JSON) %s;\0", cmd;
 			}
 		}' |\
-		parallel -m0 psql -tAUpostgres |\
+		xargs -0 psql -tAUpostgres |\
 		jq '.[]."Execution Time"'
 }
 

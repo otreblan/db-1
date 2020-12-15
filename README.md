@@ -2,4 +2,4 @@
 $ ./benchmark.sh $n
 ```
 
-Donde n es el número de pruebas.
+Donde `$n` es el número de pruebas.
